@@ -1,8 +1,9 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/bonkcomputer/framework/main/assets/bonk-computer-logo.png" alt="Bonk Computer Logo" width="60" height="30" />
+  <img src="https://raw.githubusercontent.com/bonkcomputer/framework/main/assets/bonk-computer-logo.png" alt="Bonk Computer Logo" width="888" height="888" />
 </div>
 
 # Bonk Computer Framework❗❗❗
+BCT CA: `D3CV7esuBSRB9Aw3PHRNHVz4g6b4TqeVLKhgkbonk`
 
 **Production-grade Solana Web3 development framework built on the most robust and future proof foundation. Completely Open-Sourced and built in Public by the chads at https://operate.fun and https://bonk.computer**
 
