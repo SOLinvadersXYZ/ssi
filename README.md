@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/bonkcomputer/framework/main/assets/bonk-computer-logo.png" alt="Bonk Computer Logo" width="888" height="888" />
+  <img src="https://raw.githubusercontent.com/bonkcomputer/framework/main/assets/bonk-computer-logo.png" alt="Bonk Computer Logo" width="250" height="250" />
 </div>
 
 # Bonk Computer Framework❗❗❗
