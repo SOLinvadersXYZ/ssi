@@ -2230,7 +2230,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **[Convex]()
 -
 
-## 🗺️ Roadmap
+## 🗺️ Framework Developement Roadmap
 
 - **Q3 2025**: Enhanced AI code and multimedia generation with multi-model support
 - **Q3 2025**: Add $BONK to staking model as well as the $BCT for VM resource boosts
