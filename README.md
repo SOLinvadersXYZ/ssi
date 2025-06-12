@@ -1,3 +1,9 @@
+<Image
+                src="https://2fkyfggwlscwizn6.public.blob.vercel-storage.com/bonkcomputer/BonkComputerLogoMain-FsfKSf0HTyD3BmHlOu3ylJmAaGSeEs.png"
+                alt="Bonk Computer Logo"
+                width={60}
+                height={30}
+
 # 🐶💻 Bonk Computer Framework❗❗❗
 
 **Production-grade Solana Web3 development framework built on the most robust and future proof foundation. Completely Open-Sourced and built in Public by the chads at https://operate.fun and https://bonk.computer**
