@@ -1,0 +1,73 @@
+{
+  "name": "@bonk-computer/framework",
+  "version": "1.0.0",
+  "description": "Production-grade Solana Web3 development framework built on Next-Forge foundation",
+  "type": "module",
+  "main": "dist/index.mjs",
+  "bin": {
+    "bonk-computer-framework": "dist/cli.mjs",
+    "bcf": "dist/cli.mjs"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm build",
+    "test": "vitest",
+    "lint": "biome check .",
+    "lint:fix": "biome check . --apply",
+    "format": "biome format . --write"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "README.md",
+    "assets"
+  ],
+  "keywords": [
+    "solana",
+    "web3",
+    "nextjs",
+    "framework",
+    "bonk",
+    "cli",
+    "template",
+    "boilerplate"
+  ],
+  "author": "Bonk Computer Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bonkcomputer/framework"
+  },
+  "bugs": {
+    "url": "https://github.com/bonkcomputer/framework/issues"
+  },
+  "homepage": "https://bonk.computer",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "execa": "^8.0.1",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^9.2.12",
+    "ora": "^7.0.1",
+    "semver": "^7.5.4",
+    "validate-npm-package-name": "^5.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.7.3",
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.12.7",
+    "@types/semver": "^7.5.8",
+    "@types/validate-npm-package-name": "^4.0.2",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

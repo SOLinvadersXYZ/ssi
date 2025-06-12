@@ -1,0 +1,47 @@
+{
+  "name": "sol-wif-ai-vm-full-app-temp",
+  "version": "1.0.0",
+  "description": "sol-wif-ai-vm-full-app-temp - Built with Bonk Computer Framework",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start",
+    "type-check": "tsc --noEmit",
+    "convex:dev": "convex dev",
+    "convex:deploy": "convex deploy"
+  },
+  "dependencies": {
+    "@convex-dev/react": "^1.8.1",
+    "@e2b/code-interpreter": "^0.0.5",
+    "@metaplex-foundation/js": "^0.20.1",
+    "@privy-io/react-auth": "^1.75.3",
+    "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/wallet-adapter-react-ui": "^0.9.35",
+    "@solana/wallet-adapter-wallets": "^0.19.32",
+    "@solana/web3.js": "^1.91.4",
+    "ai": "^3.0.12",
+    "@ai-sdk/anthropic": "^0.0.15",
+    "@ai-sdk/openai": "^0.0.21",
+    "convex": "^1.9.1",
+    "jupiverse-kit": "^1.0.0",
+    "next": "14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "solana-agent-kit": "^1.0.0",
+    "solana-app-kit": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.23",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.1.0",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

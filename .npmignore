@@ -1,0 +1,36 @@
+# Source files
+src/
+tsconfig.json
+tsup.config.ts
+biome.json
+
+# Development files
+.env*
+*.log
+coverage/
+.nyc_output
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Testing
+__tests__/
+*.test.ts
+*.spec.ts
+
+# Documentation (except README)
+docs/
+*.md
+!README.md
+
+# Build artifacts (keep dist/)
+node_modules/
