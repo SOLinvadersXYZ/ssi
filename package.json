@@ -1,5 +1,5 @@
 {
-  "name": "@bonk-computer/framework",
+  "name": "@bonkcomputer/framework",
   "version": "1.0.0",
   "description": "Production-grade Solana Web3 development framework built on Next-Forge foundation",
   "type": "module",
