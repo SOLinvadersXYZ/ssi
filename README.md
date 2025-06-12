@@ -1,10 +1,6 @@
-<Image
-                src="https://2fkyfggwlscwizn6.public.blob.vercel-storage.com/bonkcomputer/BonkComputerLogoMain-FsfKSf0HTyD3BmHlOu3ylJmAaGSeEs.png"
-                alt="Bonk Computer Logo"
-                width={60}
-                height={30}
+<src="https://2fkyfggwlscwizn6.public.blob.vercel-storage.com/bonkcomputer/BonkComputerLogoMain-FsfKSf0HTyD3BmHlOu3ylJmAaGSeEs.png" alt="Bonk Computer Logo"/>
 
-# 🐶💻 Bonk Computer Framework❗❗❗
+# Bonk Computer Framework❗❗❗
 
 **Production-grade Solana Web3 development framework built on the most robust and future proof foundation. Completely Open-Sourced and built in Public by the chads at https://operate.fun and https://bonk.computer**
 
@@ -19,7 +15,7 @@
 
 *BZZT* Welcome to the **Bonk Computer Framework**, a modular, open-source, Solana-native toolkit for Web3, AI, and Virtual Machines (VMs)/Virtual Private Servers (VPSs). Built on [Next-Forge's](https://www.next-forge.com/) production-grade foundation and powered by @solana's 400ms block times. *BOOP*
 
-## 🚀 Why We Use Next-Forge in the Computer framework:
+## 🚀 Why We Use Next-Forge in the Bonk Computer Framework:
 
 This framework leverages **Next-Forge's production-grade Turborepo template** to provide unmatched benefits for Solana Web3 development:
 
@@ -45,8 +41,8 @@ This framework leverages **Next-Forge's production-grade Turborepo template** to
 
 - **🔗 Solana-Native Integration**: Connects to Solana via @solana/kit, with APIs from Helius (RPC/DAS), Jupiter (liquidity), and Tapestry (identity)
 - **🤖 AI-Powered Development**: Vercel AI SDK integrates Anthropic's Claude, Alibaba's Qwen 2.5/3 VL, and OpenAI's models for code generation and debugging
-- **🔐 Web3 Authentication**: Privy.io enables passwordless $BONK/$BCT wallet access with customizable auth flows
-- **⚡ Firecracker MicroVMs**: E2B's SDK powers secure, ~150ms sandboxes for Python, Rust, JavaScript, and npm/pip packages
+- **🔐 Web3 Authentication**: Solana, Jup, and Privy.io to enables passwordless $BONK/$BCT wallet access with customizable auth flows
+- **⚡ E2B, Firecracker and MicroVMs**: E2B's SDK powers secure, ~150ms sandboxes for Python, Rust, JavaScript, and npm/pip packages
 - **🔄 Real-time Multiplayer**: Convex enables instant data synchronization for collaborative dApps, games, and multi-user experiences
 - **☁️ Serverless Deployment**: Vercel's Frontend Cloud ensures scalable, low-latency builds with edge optimization
 - **🧩 Modular & Open-Source**: MIT-licensed, GitHub-forkable, with community-driven roadmap
