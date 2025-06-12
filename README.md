@@ -1,4 +1,6 @@
-<src="https://2fkyfggwlscwizn6.public.blob.vercel-storage.com/bonkcomputer/BonkComputerLogoMain-FsfKSf0HTyD3BmHlOu3ylJmAaGSeEs.png" alt="Bonk Computer Logo"/>
+<div align="center">
+  <img src="https://raw.githubusercontent.com/bonkcomputer/framework/main/assets/bonk-computer-logo.png" alt="Bonk Computer Logo" width="60" height="30" />
+</div>
 
 # Bonk Computer Framework❗❗❗
 
