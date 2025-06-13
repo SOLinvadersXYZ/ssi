@@ -61,7 +61,7 @@ The framework uses a template system where:
 2. **Variables** like `{{PROJECT_NAME}}` are replaced during project creation
 3. **Components** can be added incrementally using `bcf add`
 
-### Available Templates
+### Available Templates For You To Build With NOW❗❗❗
 
 - `default` - Full-stack Solana dApp
 - `minimal` - Basic setup
