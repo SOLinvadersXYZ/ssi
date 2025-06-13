@@ -1,6 +1,32 @@
 # Installing the Bonk Computer Framework as a Package
 
-This guide explains how to set up and publish the Bonk Computer Framework as an installable CLI package like `next-forge@latest`.
+## 🔧 Usage
+
+We've published the package officially on NPM, users can install and use it like this:
+
+### Global Installation
+
+```bash
+npm install -g @bonk-computer/framework
+# or
+npx @bonk-computer/framework@latest init my-bonk-app
+```
+
+### Usage Commands
+
+```bash
+# Create new project
+bonk-computer-framework init my-project
+bcf init my-project
+
+# Add components
+bcf add wallet
+bcf add swap
+bcf add nft
+
+# Update framework
+bcf update
+```
 
 ## 📦 Package Structure
 
@@ -27,106 +53,6 @@ bonk-computer-framework/
 └── biome.json                # Linting/formatting
 ```
 
-## 🚀 Development Setup
-
-### 1. Install Dependencies
-
-```bash
-npm install
-# or
-pnpm install
-```
-
-### 2. Build the Package
-
-```bash
-npm run build
-# or
-pnpm build
-```
-
-This creates the `dist/` directory with compiled JavaScript files.
-
-### 3. Test Locally
-
-Link the package globally for local testing:
-
-```bash
-# Link the package
-npm link
-# or
-pnpm link --global
-
-# Test the CLI
-bonk-computer-framework init my-test-app
-# or
-bcf init my-test-app
-```
-
-### 4. Unlink When Done
-
-```bash
-npm unlink -g @bonk-computer/framework
-# or
-pnpm unlink --global @bonk-computer/framework
-```
-
-## 📚 Publishing to NPM
-
-### 1. Login to NPM
-
-```bash
-npm login
-```
-
-### 2. Update Version
-
-```bash
-npm version patch  # for bug fixes
-npm version minor  # for new features
-npm version major  # for breaking changes
-```
-
-### 3. Publish
-
-```bash
-npm publish
-```
-
-For scoped packages (recommended):
-
-```bash
-npm publish --access public
-```
-
-## 🔧 Usage After Publishing
-
-Once published, users can install and use it like this:
-
-### Global Installation
-
-```bash
-npm install -g @bonk-computer/framework
-# or
-npx @bonk-computer/framework@latest init my-bonk-app
-```
-
-### Usage Commands
-
-```bash
-# Create new project
-bonk-computer-framework init my-project
-bcf init my-project
-
-# Add components
-bcf add wallet
-bcf add swap
-bcf add nft
-
-# Update framework
-bcf update
-```
-
 ## 🏗️ Template System
 
 The framework uses a template system where:
@@ -135,7 +61,7 @@ The framework uses a template system where:
 2. **Variables** like `{{PROJECT_NAME}}` are replaced during project creation
 3. **Components** can be added incrementally using `bcf add`
 
-### Available Templates
+### Available Templates For You To Build With NOW❗❗❗
 
 - `default` - Full-stack Solana dApp
 - `minimal` - Basic setup
