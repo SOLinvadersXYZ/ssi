@@ -18,6 +18,102 @@ BCT CA: `D3CV7esuBSRB9Aw3PHRNHVz4g6b4TqeVLKhgkbonk`
 
 *BZZT* Welcome to the **Bonk Computer Framework**, a modular, open-source, Solana-native toolkit for Web3, AI, and Virtual Machines (VMs)/Virtual Private Servers (VPSs). Built on [Next-Forge's](https://www.next-forge.com/) production-grade foundation and powered by @solana's 400ms block times. *BOOP*
 
+## 🚀 Quick Start & Installation
+
+### **Global Installation**
+
+Install the Bonk Computer Framework CLI globally:
+
+```bash
+# Install globally via npm
+npm install -g @bonkcomputer/framework
+
+# Or install via pnpm (recommended)
+pnpm add -g @bonkcomputer/framework
+
+# Or install via yarn
+yarn global add @bonkcomputer/framework
+```
+
+### **Create a New Project**
+
+```bash
+# Full command
+bonk-computer-framework init my-solana-app
+
+# Or use the short alias
+bcf init my-solana-app
+
+# Create with specific template
+bcf init my-game --template game
+bcf init my-defi-app --template defi
+bcf init my-nft-marketplace --template nft
+bcf init simple-app --template minimal
+```
+
+### **Available Templates**
+
+- **🚀 default** - Full-stack Solana dApp with all features
+- **🎮 game** - Real-time multiplayer game with Convex
+- **🏪 defi** - Decentralized exchange and trading platform
+- **🖼️ nft** - NFT marketplace and minting application
+- **⚡ minimal** - Basic Solana integration only
+
+### **Add Components to Existing Projects**
+
+```bash
+# Add wallet connection components
+bcf add wallet
+
+# Add Jupiter-powered token swap
+bcf add swap
+
+# Add NFT gallery and minting
+bcf add nft
+
+# Add real-time multiplayer game features
+bcf add game
+
+# Add DeFi staking and lending components
+bcf add defi
+
+# Add AI-powered development tools
+bcf add ai
+
+# Add E2B code execution sandboxes
+bcf add vm
+```
+
+### **Development Commands**
+
+```bash
+# Navigate to your project
+cd my-solana-app
+
+# Install dependencies
+pnpm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Add your API keys to .env.local
+
+# Start development server
+pnpm run dev
+
+# Start real-time backend (if using Convex)
+pnpm run convex:dev
+```
+
+### **Update Framework**
+
+```bash
+# Check for updates
+bcf update --check
+
+# Update to latest version
+bcf update
+```
+
 ## 🚀 Why We Use Next-Forge in the Bonk Computer Framework:
 
 This framework leverages **Next-Forge's production-grade Turborepo template** to provide unmatched benefits for Solana Web3 development:

@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* NFT specific styles */
+.nft-card {
+  @apply bg-white/10 border border-white/20 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+.nft-card-image {
+  @apply w-full aspect-square object-cover;
+}
+
+.nft-button {
+  @apply bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105;
+}
+
+.nft-input {
+  @apply bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-500;
+}
+
+.collection-card {
+  @apply bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-md border border-purple-400/30 rounded-xl p-6;
+}
+
+.mint-card {
+  @apply bg-gradient-to-br from-indigo-500/20 to-purple-500/20 backdrop-blur-md border border-indigo-400/30 rounded-xl p-8;
+}
+
+.marketplace-item {
+  @apply bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-colors cursor-pointer;
+}
+
+.rarity-common {
+  @apply bg-gray-500/20 border-gray-400/30;
+}
+
+.rarity-uncommon {
+  @apply bg-green-500/20 border-green-400/30;
+}
+
+.rarity-rare {
+  @apply bg-blue-500/20 border-blue-400/30;
+}
+
+.rarity-epic {
+  @apply bg-purple-500/20 border-purple-400/30;
+}
+
+.rarity-legendary {
+  @apply bg-yellow-500/20 border-yellow-400/30;
+}
+
+.trait-badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/20 text-white;
+}
+
+.price-badge {
+  @apply inline-flex items-center px-3 py-1 rounded-lg text-sm font-semibold bg-green-500/20 text-green-400 border border-green-400/30;
+}
+
+.status-listed {
+  @apply text-green-400;
+}
+
+.status-sold {
+  @apply text-gray-400;
+}
+
+.status-draft {
+  @apply text-yellow-400;
+}
+
+.grid-nft {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+}
+
+.metadata-row {
+  @apply flex justify-between py-2 border-b border-white/10 last:border-b-0;
+}
