@@ -1,6 +1,32 @@
 # Installing the Bonk Computer Framework as a Package
 
-This guide explains how to set up and publish the Bonk Computer Framework as an installable CLI package like `next-forge@latest`.
+## 🔧 Usage
+
+We've published the package officially on NPM, users can install and use it like this:
+
+### Global Installation
+
+```bash
+npm install -g @bonk-computer/framework
+# or
+npx @bonk-computer/framework@latest init my-bonk-app
+```
+
+### Usage Commands
+
+```bash
+# Create new project
+bonk-computer-framework init my-project
+bcf init my-project
+
+# Add components
+bcf add wallet
+bcf add swap
+bcf add nft
+
+# Update framework
+bcf update
+```
 
 ## 📦 Package Structure
 
@@ -25,34 +51,6 @@ bonk-computer-framework/
 ├── tsconfig.json             # TypeScript config
 ├── tsup.config.ts            # Build configuration
 └── biome.json                # Linting/formatting
-```
-
-## 🔧 Usage
-
-Once published, users can install and use it like this:
-
-### Global Installation
-
-```bash
-npm install -g @bonk-computer/framework
-# or
-npx @bonk-computer/framework@latest init my-bonk-app
-```
-
-### Usage Commands
-
-```bash
-# Create new project
-bonk-computer-framework init my-project
-bcf init my-project
-
-# Add components
-bcf add wallet
-bcf add swap
-bcf add nft
-
-# Update framework
-bcf update
 ```
 
 ## 🏗️ Template System
