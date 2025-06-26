@@ -24,6 +24,13 @@ class SoundManager {
     this.preloadMusic("title", "/music/title.mp3")
     this.preloadMusic("gameplay", "/music/gameplay.mp3")
     this.preloadMusic("boss", "/music/boss.mp3")
+    
+    // Load level-specific music tracks
+    this.preloadMusic("level1", "/music/level1.mp3")
+    this.preloadMusic("level2", "/music/level2.mp3")
+    this.preloadMusic("level3", "/music/level3.mp3")
+    this.preloadMusic("level5", "/music/level5.mp3")
+    this.preloadMusic("level6", "/music/level6.mp3")
 
     // Listen for settings changes
     gameState.on("settingsChange", this.handleSettingsChange.bind(this))
@@ -112,6 +119,22 @@ class SoundManager {
       this.music.play().catch((e) => console.error("Error resuming music:", e))
       this.isMusicPlaying = true
     }
+  }
+
+  // Play level-specific music
+  playLevelMusic(levelNumber: number): void {
+    // Map level numbers to available music files
+    const levelMusicMap: { [key: number]: string } = {
+      1: "level1",
+      2: "level2",
+      3: "level3",
+      4: "gameplay", // Fallback to gameplay music for level 4 since level4.mp3 is missing
+      5: "level5",
+      6: "level6"
+    }
+    
+    const musicName = levelMusicMap[levelNumber] || "gameplay"
+    this.playMusic(musicName)
   }
 
   // Set sound volume
