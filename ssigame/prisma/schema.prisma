@@ -1,0 +1,167 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  privyId       String   @unique
+  username      String?
+  walletAddress String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  leaderboardEntries LeaderboardEntry[]
+  userProgress       UserProgress?
+  rewardClaims       RewardClaim[]
+  friendRequests     Friend[] @relation("UserFriends")
+  friendOf           Friend[] @relation("FriendOf")
+  challengesSent     Challenge[] @relation("ChallengeSender")
+  challengesReceived Challenge[] @relation("ChallengeReceiver")
+
+  @@map("users")
+}
+
+model LeaderboardEntry {
+  id           String   @id @default(cuid())
+  userId       String
+  username     String
+  score        Int
+  level        Int
+  date         DateTime @default(now())
+  verified     Boolean  @default(false)
+  gameplayTime Int?     // in seconds
+  deviceInfo   String?
+  createdAt    DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [privyId])
+
+  // Indexes for performance
+  @@index([score])
+  @@index([date])
+  @@index([userId])
+  @@map("leaderboard_entries")
+}
+
+model UserProgress {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  highestLevel   Int      @default(1)
+  totalScore     Int      @default(0)
+  achievements   String[] // Array of achievement names
+  lastPlayed     DateTime @default(now())
+  playCount      Int      @default(0)
+  totalPlayTime  Int      @default(0) // in seconds
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [privyId])
+
+  @@map("user_progress")
+}
+
+model RewardClaim {
+  id          String            @id @default(cuid())
+  userId      String
+  username    String
+  amount      Float
+  period      String            // 'weekly' or 'monthly'
+  periodEnd   DateTime
+  rank        Int
+  status      RewardClaimStatus @default(PENDING)
+  requestDate DateTime          @default(now())
+  reviewDate  DateTime?
+  paymentDate DateTime?
+  paymentTxId String?
+  reviewNotes String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [privyId])
+
+  // Indexes
+  @@index([status])
+  @@index([period, periodEnd])
+  @@map("reward_claims")
+}
+
+model Friend {
+  id               String       @id @default(cuid())
+  userId           String
+  friendId         String
+  username         String
+  friendUsername   String
+  status           FriendStatus @default(PENDING)
+  requestDate      DateTime     @default(now())
+  responseDate     DateTime?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  // Relations
+  user   User @relation("UserFriends", fields: [userId], references: [privyId])
+  friend User @relation("FriendOf", fields: [friendId], references: [privyId])
+
+  // Unique constraint to prevent duplicate friend requests
+  @@unique([userId, friendId])
+  @@map("friends")
+}
+
+model Challenge {
+  id                 String          @id @default(cuid())
+  challengerId       String
+  challengerUsername String
+  challengeeId       String
+  challengeeUsername String
+  score              Int
+  level              Int
+  expiryDate         DateTime
+  status             ChallengeStatus @default(PENDING)
+  createdAt          DateTime        @default(now())
+  acceptedAt         DateTime?
+  completedAt        DateTime?
+  challengeeScore    Int?
+  challengeeLevel    Int?
+  winnerId           String?
+  updatedAt          DateTime        @updatedAt
+
+  // Relations
+  challenger User @relation("ChallengeSender", fields: [challengerId], references: [privyId])
+  challengee User @relation("ChallengeReceiver", fields: [challengeeId], references: [privyId])
+
+  // Indexes
+  @@index([status])
+  @@index([expiryDate])
+  @@map("challenges")
+}
+
+// Enums
+enum RewardClaimStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  PAID
+}
+
+enum FriendStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum ChallengeStatus {
+  PENDING
+  ACCEPTED
+  COMPLETED
+  EXPIRED
+} 
