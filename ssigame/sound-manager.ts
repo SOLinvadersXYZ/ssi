@@ -7,11 +7,14 @@ class SoundManager {
   private currentMusic = ""
   private isMusicPlaying = false
   private playingSounds: { [key: string]: HTMLAudioElement } = {}
+  private loadedSounds: Set<string> = new Set()
+  private loadedMusic: Set<string> = new Set()
+  private isInitialized = false
 
   // Load and initialize all sounds
   async initialize(): Promise<void> {
     // Load sound effects
-    this.loadSound("shoot", "/sounds/shoot.mp3")
+    this.loadSound("shoot", "/sounds/shoot.MP3")
     this.loadSound("explosion", "/sounds/explosion.mp3")
     this.loadSound("powerup", "/sounds/powerup.mp3")
     this.loadSound("damage", "/sounds/damage.mp3")
@@ -21,10 +24,8 @@ class SoundManager {
     this.loadSound("shield", "/sounds/shield.mp3")
     this.loadSound("gameover", "/sounds/gameover.mp3")
 
-    // Load music tracks
+    // Load music tracks (only existing files)
     this.preloadMusic("title", "/music/title.mp3")
-    this.preloadMusic("gameplay", "/music/gameplay.mp3")
-    this.preloadMusic("boss", "/music/boss.mp3")
     
     // Load level-specific music tracks
     this.preloadMusic("level1", "/music/level1.mp3")
@@ -35,21 +36,61 @@ class SoundManager {
 
     // Listen for settings changes
     gameState.on("settingsChange", this.handleSettingsChange.bind(this))
+    
+    // Mark as initialized
+    this.isInitialized = true
   }
 
-  // Load a sound effect
+  // Check if all critical assets are loaded
+  isReady(): boolean {
+    const requiredSounds = ["shoot", "explosion", "powerup", "damage", "menu", "boss", "levelup", "gameover"]
+    const requiredMusic = ["title", "level1", "level2", "level3", "level5", "level6"]
+    
+    const soundsLoaded = requiredSounds.every(sound => this.loadedSounds.has(sound))
+    const musicLoaded = requiredMusic.every(music => this.loadedMusic.has(music))
+    
+    return this.isInitialized && soundsLoaded && musicLoaded
+  }
+
+  // Get loading progress (0-1)
+  getLoadingProgress(): number {
+    const requiredSounds = ["shoot", "explosion", "powerup", "damage", "menu", "boss", "levelup", "gameover"]
+    const requiredMusic = ["title", "level1", "level2", "level3", "level5", "level6"]
+    
+    const totalAssets = requiredSounds.length + requiredMusic.length
+    const loadedAssets = this.loadedSounds.size + this.loadedMusic.size
+    
+    return Math.min(loadedAssets / totalAssets, 1.0)
+  }
+
+  // Load a sound effect with error handling
   private loadSound(name: string, path: string): void {
     const audio = new Audio()
     audio.src = path
     audio.preload = "auto"
-    this.sounds[name] = audio
 
     // Set initial volume
     const settings = gameState.getSettings()
     audio.volume = settings.soundVolume
+
+    // Add error handling for missing files
+    audio.addEventListener('error', (e) => {
+      console.warn(`Failed to load sound file: ${path}`, e)
+      // Don't store failed audio files
+      return
+    })
+
+    // Add load success handler
+    audio.addEventListener('canplaythrough', () => {
+      console.log(`Successfully preloaded sound: ${name}`)
+      this.loadedSounds.add(name)
+    })
+
+    // Store in sounds collection
+    this.sounds[name] = audio
   }
 
-  // Preload music track
+  // Preload music track with error handling
   private preloadMusic(name: string, path: string): void {
     const audio = new Audio()
     audio.src = path
@@ -59,6 +100,19 @@ class SoundManager {
     // Set initial volume
     const settings = gameState.getSettings()
     audio.volume = settings.musicVolume
+
+    // Add error handling for missing files
+    audio.addEventListener('error', (e) => {
+      console.warn(`Failed to load music file: ${path}`, e)
+      // Don't store failed audio files
+      return
+    })
+
+    // Add load success handler
+    audio.addEventListener('canplaythrough', () => {
+      console.log(`Successfully preloaded music: ${name}`)
+      this.loadedMusic.add(name)
+    })
 
     // Store in sounds collection
     this.sounds[`music_${name}`] = audio
@@ -90,7 +144,7 @@ class SoundManager {
     sound.play().catch((e) => console.error("Error playing sound:", e))
   }
 
-  // Play music track
+  // Play music track with fallback handling
   playMusic(name: string): void {
     const settings = gameState.getSettings()
     const musicKey = `music_${name}`
@@ -101,13 +155,32 @@ class SoundManager {
     // Stop current music
     this.stopMusic()
 
-    if (settings.musicEnabled && this.sounds[musicKey]) {
-      this.music = this.sounds[musicKey].cloneNode(true) as HTMLAudioElement
-      this.music.loop = true
-      this.music.volume = settings.musicVolume
-      this.music.play().catch((e) => console.error("Error playing music:", e))
-      this.currentMusic = musicKey
-      this.isMusicPlaying = true
+    if (settings.musicEnabled) {
+      // Check if the requested music exists, otherwise try fallbacks
+      let fallbackMusic = musicKey
+      if (!this.sounds[musicKey]) {
+        console.warn(`Music track not found: ${name}, trying fallbacks`)
+        
+        // Try fallback options in order of preference
+        const fallbacks = ["music_title", "music_level1", "music_level2", "music_level3"]
+        for (const fallback of fallbacks) {
+          if (this.sounds[fallback]) {
+            fallbackMusic = fallback
+            break
+          }
+        }
+      }
+
+      if (this.sounds[fallbackMusic]) {
+        this.music = this.sounds[fallbackMusic].cloneNode(true) as HTMLAudioElement
+        this.music.loop = true
+        this.music.volume = settings.musicVolume
+        this.music.play().catch((e) => console.error("Error playing music:", e))
+        this.currentMusic = fallbackMusic
+        this.isMusicPlaying = true
+      } else {
+        console.warn("No music tracks available to play")
+      }
     }
   }
 
@@ -144,12 +217,12 @@ class SoundManager {
       1: "level1",
       2: "level2",
       3: "level3",
-      4: "gameplay", // Fallback to gameplay music for level 4 since level4.mp3 is missing
+      4: "level3", // Fallback to level3 music since level4.mp3 is missing
       5: "level5",
       6: "level6"
     }
     
-    const musicName = levelMusicMap[levelNumber] || "gameplay"
+    const musicName = levelMusicMap[levelNumber] || "level1" // Default fallback to level1
     this.playMusic(musicName)
   }
 

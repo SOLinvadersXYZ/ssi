@@ -105,10 +105,29 @@ export default function BonkShooter() {
       setHighScore(storedHighScores[0].score)
     }
 
-    // Initialize sound system
+    // Initialize sound system with loading progress
     soundManager.initialize().then(() => {
-      // Play title music once sounds are loaded
-      soundManager.playMusic("title")
+      console.log("Sound manager initialized")
+      
+      // Wait for critical assets to load before playing music
+      const checkAssetsLoaded = () => {
+        if (soundManager.isReady()) {
+          console.log("All audio assets loaded successfully")
+          soundManager.playMusic("title")
+        } else {
+          const progress = soundManager.getLoadingProgress()
+          console.log(`Audio loading progress: ${Math.round(progress * 100)}%`)
+          
+          // Check again in 100ms if not ready
+          setTimeout(checkAssetsLoaded, 100)
+        }
+      }
+      
+      // Start checking for loaded assets
+      checkAssetsLoaded()
+    }).catch((error) => {
+      console.error("Failed to initialize sound manager:", error)
+      // Continue without sound if initialization fails
     })
 
     // Set up game state listeners

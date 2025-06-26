@@ -34,7 +34,44 @@ const nextConfig = {
       }
     }
 
+    // Add proper handling for audio files
+    config.module.rules.push({
+      test: /\.(mp3|wav|ogg)$/,
+      use: {
+        loader: 'file-loader',
+        options: {
+          publicPath: '/_next/static/sounds/',
+          outputPath: 'static/sounds/',
+          name: '[name].[hash].[ext]',
+        },
+      },
+    })
+
     return config
+  },
+  
+  // Add headers for better caching
+  async headers() {
+    return [
+      {
+        source: '/sounds/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/music/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ]
   },
 }
 

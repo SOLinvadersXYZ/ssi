@@ -113,6 +113,36 @@ class GameStateManager extends EventEmitter {
     this.privy = privyInstance
   }
 
+  // Clear user-specific cached data on logout
+  clearUserData(): void {
+    // Reset game state but keep settings and achievements
+    this.score = 0
+    this.level = 1
+    this.weaponsCollected.clear()
+    this.gameInProgress = false
+    this.perfectLevelCompleted = false
+    this.state = "title"
+    
+    // Clear server-related data but keep local high scores and achievements
+    // This ensures a clean state for the next user while preserving local progress
+    console.log("User data cleared for logout")
+  }
+
+  // Reset all data (for complete reset)
+  resetAllData(): void {
+    this.settings = { ...DEFAULT_SETTINGS }
+    this.highScores = []
+    this.achievements = [...DEFAULT_ACHIEVEMENTS]
+    this.clearUserData()
+    
+    // Clear localStorage
+    saveToLocalStorage("bsiSettings", this.settings)
+    saveToLocalStorage("bsiHighScores", this.highScores)
+    saveToLocalStorage("bsiAchievements", this.achievements)
+    
+    console.log("All game data reset")
+  }
+
   // State management
   getState(): GameStateType {
     return this.state
