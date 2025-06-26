@@ -119,7 +119,7 @@ export default function BonkShooter() {
       if (newState === "title" && oldState !== "paused") {
         soundManager.playMusic("title")
       } else if (newState === "playing" && oldState !== "paused") {
-        soundManager.playMusic("gameplay")
+        soundManager.playLevelMusic(level)
       } else if (newState === "gameOver") {
         soundManager.playSound("gameover")
       }
@@ -132,6 +132,10 @@ export default function BonkShooter() {
     gameState.on("levelChange", (newLevel: number) => {
       setLevel(newLevel)
       soundManager.playSound("levelup")
+      // Play level-specific music after level up sound
+      setTimeout(() => {
+        soundManager.playLevelMusic(newLevel)
+      }, 500)
     })
 
     gameState.on("achievementUnlocked", (achievement: Achievement) => {
@@ -1127,12 +1131,8 @@ export default function BonkShooter() {
           perfectLevel = true
           bossSpawned = false
 
-          // Play level music
-          if (levels[currentLevelIndex].bossLevel) {
-            soundManager.playMusic("boss")
-          } else {
-            soundManager.playMusic("gameplay")
-          }
+          // Play level-specific music
+          soundManager.playLevelMusic(currentLevelIndex + 1)
 
           return
         }
@@ -2090,7 +2090,7 @@ export default function BonkShooter() {
 
     // Play sound
     soundManager.playSound("menu")
-    soundManager.playMusic("gameplay")
+    soundManager.playLevelMusic(1)
   }
 
   // Handle resume game

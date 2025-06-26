@@ -6,6 +6,7 @@ class SoundManager {
   private music: HTMLAudioElement | null = null
   private currentMusic = ""
   private isMusicPlaying = false
+  private playingSounds: { [key: string]: HTMLAudioElement } = {}
 
   // Load and initialize all sounds
   async initialize(): Promise<void> {
@@ -63,14 +64,29 @@ class SoundManager {
     this.sounds[`music_${name}`] = audio
   }
 
-  // Play a sound effect
+  // Play a sound effect (single instance only)
   playSound(name: string): void {
     const settings = gameState.getSettings()
     if (!settings.soundEnabled || !this.sounds[name]) return
 
-    // Clone the audio to allow overlapping sounds
+    // Stop any currently playing instance of this sound
+    if (this.playingSounds[name]) {
+      this.playingSounds[name].pause()
+      this.playingSounds[name].currentTime = 0
+    }
+
+    // Create new instance and play
     const sound = this.sounds[name].cloneNode(true) as HTMLAudioElement
     sound.volume = settings.soundVolume
+    
+    // Track this sound instance
+    this.playingSounds[name] = sound
+    
+    // Clean up when sound ends
+    sound.addEventListener('ended', () => {
+      delete this.playingSounds[name]
+    })
+    
     sound.play().catch((e) => console.error("Error playing sound:", e))
   }
 
